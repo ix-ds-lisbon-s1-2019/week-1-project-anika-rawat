@@ -17,15 +17,16 @@ card_values = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: 10, 'J'
 def start(num_of_players): 
     names = []
     for i in range(num_of_players): 
-        new_name = input("What is the name of player?")
+        new_name = input("What is the name of player " + str(i+1)+ "?")
         names.append(new_name)
-    #print(names)
+    print("Players are: ", names)
     new_deck = create_deck()
     #print(new_deck)
     #shuffle method here shuffles in place and does not return anything
     shuffle_three_times(new_deck)
     #print(new_deck)
     hands = deal_cards(new_deck, num_of_players)
+    print("Player hands are: ", hands)
     original_hands = copy.deepcopy(hands)
     winning_hand = compare_hands(hands)
     declare_winner(winning_hand, names, original_hands)
@@ -63,7 +64,7 @@ def compare_hands(hands):
             if type(hand[i]) != int: 
                 hand[i] = card_values.get(hand[i])
         hand = hand.sort(reverse = True) 
-    print(hands)
+    #print(hands)
         
     max_values = find_max_values(hands)
     #some loop to make sure unique vals 
@@ -85,8 +86,8 @@ def find_max_values(hands):
     return max_list
         
 def declare_winner(winIndex, names, orig_hands): 
-    print("Winner is player ", names[winIndex])
-    print("Winning card hand is: ", orig_hands[winIndex])
+    print("Winner is player ", names[winIndex], "!")
+    print("Winning card hand is: ", orig_hands[winIndex], "!")
     
     
 start(first_input)
